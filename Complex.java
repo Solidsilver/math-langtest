@@ -78,8 +78,6 @@ public class Complex {
         );
     }
 
-
-
     public Complex multiply(double factor) {
         return new Complex(
             this.real * factor,
@@ -117,7 +115,6 @@ public class Complex {
     }
 
     public static Complex parseComplex(String s) {
-        //Pattern p = new Pattern.compile("[+-]?[0-9]+i");
         Pattern p = Pattern.compile("[+-]?[0-9]+i");
         Matcher m = p.matcher(s);
         int indexI = s.indexOf("i");
@@ -146,13 +143,11 @@ public class Complex {
                 imaginary = "0";
             }
         }
-        
-        
-        //System.out.println("Parse: " + real + ", " + imaginary);
         return new Complex(Double.parseDouble(real), Double.parseDouble(imaginary));
     }
 
     public static void main(String[] args) {
+        System.out.println("Complex class operations test:");
         Complex c1 = new Complex(3, -2);
         Complex c2 = new Complex(3, 2);
         System.out.println("c1: " + c1);

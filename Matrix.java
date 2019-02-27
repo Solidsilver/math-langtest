@@ -5,10 +5,56 @@ public class Matrix {
     private Complex[][] mtx;
     private int m, n;
 
-    public Matrix(Complex[][] mtx, int m, int n) {
+    private Matrix(Complex[][] mtx, int m, int n) {
         this.mtx = mtx;
         this.m = m;
         this.n = n;
+    }
+
+    private Matrix(Complex[][] mtx) {
+        this(mtx, mtx.length, mtx[0].length);
+    }
+
+    public Matrix() {
+        Matrix newMtx = readMatrix();
+        this.mtx = newMtx.mtx;
+        this.m = newMtx.m;
+        this.n = newMtx.n;
+    }
+
+    public int getM() {
+        return this.m;
+    }
+
+    public int getN() {
+        return this.n;
+    }
+
+    public Complex getValue(int row, int column) {
+        if (row >= m || column >= n) {
+            throw new IndexOutOfBoundsException();
+        }
+        return this.mtx[row][column];
+    }
+
+    public void setValue(Complex value, int row, int column) {
+        if (row >= m || column >= n) {
+            throw new IndexOutOfBoundsException();
+        }
+        this.mtx[row][column] = value;
+    }
+
+    public Matrix add(Matrix addand) {
+        Complex[][] newMtr = new Complex[m][n];
+        if (this.m != addand.m || this.n != addand.n) {
+            throw new MismatchDimensionException("Addition requres the same dimension");
+        }
+        for (int row = 0; row < this.m; row++) {
+            for (int x = 0; x < this.n; x++) {
+                newMtr[row][x] = this.mtx[row][x].add(addand.mtx[row][x]);
+            }
+        }
+        return new Matrix(newMtr);
     }
 
     public static Matrix readMatrix() {
