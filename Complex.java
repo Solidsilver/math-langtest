@@ -2,22 +2,26 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * The class {@code Complex} represents a complex number
- * as an object. An object of type {@code Complex}
- * contains a two fields of type {@code double} representing
- * the real and imaginary components of a complex number.
+ * The class {@code Complex} represents a complex number as an object. An object
+ * of type {@code Complex} contains a two fields of type {@code double}
+ * representing the real and imaginary components of a complex number.
  * 
- * <p>This class also contains contains methods for 
- * performing basic numeric operations on {@code Complex} objects.
- * 
- * <p>In addition, this class provides methods for converting
- * a {@code Complex} to a {@code String} and a {@code String} to an
- * {@code Complex}, as well as other constants and methods useful when
- * dealing with a {@code Complex} number.
  * <p>
+ * This class also contains contains methods for performing basic numeric
+ * operations on {@code Complex} objects.
  * 
- * @author  Luke Mattfeld
- * @since   1.0
+ * <p>
+ * In addition, this class provides methods for converting a {@code Complex} to
+ * a {@code String} and a {@code String} to an {@code Complex}, as well as other
+ * constants and methods useful when dealing with a {@code Complex} number.
+ * 
+ * <p>
+ * This class is based roughly off of the {@code Complex} class in in
+ * {@link org.apache.commons.math4}, though no code is shared.
+ * 
+ * 
+ * @author Luke Mattfeld
+ * @since 1.0
  */
 public class Complex {
     private double real;
@@ -42,12 +46,11 @@ public class Complex {
     public static Complex I = new Complex(0, 1);
 
     /**
-     * Constructs a newly allocated {@code Complex} object that
-     * represents a complex number as
-     * two {@code double} values.
+     * Constructs a newly allocated {@code Complex} object that represents a complex
+     * number as two {@code double} values.
      *
-     * @param   real   the value of the real part of the complex number.
-     * @param   imaginary the value of the imaginary part of the complex number.
+     * @param real      the value of the real part of the complex number.
+     * @param imaginary the value of the imaginary part of the complex number.
      */
     public Complex(double real, double imaginary) {
         this.real = real;
@@ -55,37 +58,58 @@ public class Complex {
     }
 
     /**
-     * Constructs a newly allocated {@code Complex} object that
-     * represents a complex number as
-     * two {@code double} values.
+     * Constructs a newly allocated {@code Complex} object that represents a complex
+     * number as two {@code double} values.
      * 
      * This constructor sets the imaginary part to {@code 0};
      *
-     * @param   real   the value of the real part of the complex number.
+     * @param real the value of the real part of the complex number.
      */
     public Complex(double real) {
         this(real, 0.0);
     }
 
     /**
-     * Returns the real part of {@code this} complex
-     * as a {@code double}
+     * Creates a complex number given the real part as a {@code decimal}. The
+     * imaginary component is set to {@code 0.0}
+     * 
+     * @param real value of the real part of a complex number.
+     * @return a {@code Complex} object with given values.
+     */
+    public static Complex valueOf(double real) {
+        return valueOf(real, 0.0);
+    }
+
+    /**
+     * Creates a complex number given the real and imaginary parts as
+     * {@code decimal}s
+     * 
+     * @param real      value of the real part of a complex number.
+     * @param imaginary value of the imaginary part of a complex number.
+     * @return a {@code Complex} object with given values.
+     */
+    public static Complex valueOf(double real, double imaginary) {
+        return new Complex(real, imaginary);
+    }
+
+    /**
+     * Returns the real part of {@code this} complex as a {@code double}
      */
     public double getReal() {
         return this.real;
     }
 
     /**
-     * Returns the imaginary part of {@code this} complex
-     * as a {@code double}
+     * Returns the imaginary part of {@code this} complex as a {@code double}
      */
     public double getImaginary() {
         return this.imaginary;
     }
 
     /**
-     * Returns a Complex whose value is the absolute value of {@code this} complex number.
-     * This is defined as: <p>
+     * Returns a Complex whose value is the absolute value of {@code this} complex
+     * number. This is defined as:
+     * <p>
      * abs(a + bi) = sqrt(a^2+b^2)
      *
      * @return {@code abs(this)}
@@ -95,11 +119,29 @@ public class Complex {
     }
 
     /**
-     * Returns a Complex whose value is {@code (this + addend)}.
-     * Uses the formula: <p>
+     * Returns a boolean indicating if ({@code this} == {@code cOther}). This is
+     * determined by calling {@link java.lang.Double#equals(Object)} on a wrapped
+     * version of the doubles representing the real and imaginary components of
+     * {@code this} and {@code cOther}.
+     * 
+     * @param cOther {@code Complex} to compare to {@other this}
+     * @return {@code this} equals {@code cOther}
+     * @see java.lang.Double#equals(Object)
+     */
+    public boolean equals(Complex cOther) {
+        Double rThis = this.real;
+        Double rOther = cOther.real;
+        Double iThis = this.imaginary;
+        Double iOther = cOther.imaginary;
+        return rThis.equals(rOther) && iThis.equals(iOther);
+    }
+
+    /**
+     * Returns a Complex whose value is {@code (this + addend)}. Uses the formula:
+     * <p>
      * (a + bi) + (c + di) = (a+c) + (b+d)i
      *
-     * @param  addend complex value to be added to this Complex.
+     * @param addend complex value to be added to this Complex.
      * @return {@code this + addend}
      */
     public Complex add(Complex addend) {
@@ -107,11 +149,11 @@ public class Complex {
     }
 
     /**
-     * Returns a Complex whose value is {@code (this + addend)}.
-     * Uses the formula: <p>
+     * Returns a Complex whose value is {@code (this + addend)}. Uses the formula:
+     * <p>
      * (a + bi) + c = (a+c) + bi
      *
-     * @param  addend double value to be added to this Complex.
+     * @param addend double value to be added to this Complex.
      * @return {@code this + addend}
      */
     public Complex add(double addend) {
@@ -119,11 +161,11 @@ public class Complex {
     }
 
     /**
-     * Returns a Complex whose value is {@code (this + subtrand)}. 
-     * Uses the formula: <p>
+     * Returns a Complex whose value is {@code (this + subtrand)}. Uses the formula:
+     * <p>
      * (a + bi) - (c-di) = (a-c) + (b-d)i
      *
-     * @param  subtrand complex value to be subtracted from this Complex.
+     * @param subtrand complex value to be subtracted from this Complex.
      * @return {@code this + subtrand}
      */
     public Complex subtract(Complex subtrand) {
@@ -131,11 +173,11 @@ public class Complex {
     }
 
     /**
-     * Returns a Complex whose value is {@code (this - addend)}.
-     * Uses the formula: <p>
+     * Returns a Complex whose value is {@code (this - addend)}. Uses the formula:
+     * <p>
      * (a + bi) - c = (a-c) + bi
      *
-     * @param  addend double value to be added to this Complex.
+     * @param addend double value to be added to this Complex.
      * @return {@code this - addend}
      */
     public Complex subtract(double subtrand) {
@@ -152,15 +194,13 @@ public class Complex {
     }
 
     /**
-     * Returns a Complex whose value is {@code (this / divisor)}.
-     * Uses the formula: <p>
+     * Returns a Complex whose value is {@code (this / divisor)}. Uses the formula:
+     * <p>
      *
-     * (a + bi) / (c + di) = 
-     * (((a*c)+(b*d))/(c^2+d^2) +
-     * (((b*c)-(a*d))/(c^2+d^2))i
+     * (a + bi) / (c + di) = (((a*c)+(b*d))/(c^2+d^2) + (((b*c)-(a*d))/(c^2+d^2))i
      *
      *
-     * @param  divisor Complex value to divide this Complex by.
+     * @param divisor Complex value to divide this Complex by.
      * @return {@code this / divisor}
      */
     public Complex divide(Complex divisor) {
@@ -170,11 +210,11 @@ public class Complex {
     }
 
     /**
-     * Returns a Complex whose value is {@code (this * factor)}.
-     * Uses the formula: <p>
+     * Returns a Complex whose value is {@code (this * factor)}. Uses the formula:
+     * <p>
      * (a + bi) * (c + di) = (a*c - b*d) + (a*d + b*c)i
      *
-     * @param  factor Complex value to be multiplied by this Complex.
+     * @param factor Complex value to be multiplied by this Complex.
      * @return {@code this * factor}
      */
     public Complex multiply(Complex factor) {
@@ -183,11 +223,11 @@ public class Complex {
     }
 
     /**
-     * Returns a Complex whose value is {@code (this * factor)}.
-     * Uses the formula: <p>
+     * Returns a Complex whose value is {@code (this * factor)}. Uses the formula:
+     * <p>
      * (a + bi) * c = (a*c) + (b*c)i
      *
-     * @param  factor double value to be multiplied by this Complex.
+     * @param factor double value to be multiplied by this Complex.
      * @return {@code this * factor}
      */
     public Complex multiply(double factor) {
@@ -195,11 +235,20 @@ public class Complex {
     }
 
     /**
-     * Returns a Complex whose value is {@code (this ^ x)}.
-     * Uses the formula: <p>
+     * Returns a complex whos value is {@code (-this)}.
+     * 
+     * @return {@code -this}
+     */
+    public Complex negate() {
+        return new Complex(this.real * -1, this.imaginary * -1);
+    }
+
+    /**
+     * Returns a Complex whose value is {@code (this ^ x)}. Uses the formula:
+     * <p>
      * (a+bi)^n = (a+bi)(a+bi)...(a+bi) - n times;
      *
-     * @param  x double value to raise this Complex by.
+     * @param x double value to raise this Complex by.
      * @return {@code this ^ x}
      */
     public Complex pow(double x) {
@@ -214,18 +263,28 @@ public class Complex {
     }
 
     /**
-     * Returns a {@code String} object representing this
-     * {@code Complex}'s value. The value is converted to signed
-     * complex-decimal representation and returned as a string, exactly as if
-     * the real and imaginary values were given as an argument to the {@link
-     * java.lang.Double#toString(double)} method, with appropriate sign
-     * between parts, and an ASCII {@code 'i'} after the imaginary part.
+     * Returns the multiplicative inverse of {@code this} complex number.
      * 
-     * If there is no imaginary part, only the real part will be returned.
-     * If there is no real part, only the imaginary part will be returned.
+     * @return reciprocal of {@code this}
+     */
+    public Complex reciprocal() {
+        return Complex.ONE.divide(this);
+    }
+
+    /**
+     * Returns a {@code String} object representing this {@code Complex}'s value.
+     * The value is converted to signed complex-decimal representation and returned
+     * as a string, exactly as if the real and imaginary values were given as an
+     * argument to the {@link java.lang.Double#toString(double)} method, with
+     * appropriate sign between parts, and an ASCII {@code 'i'} after the imaginary
+     * part.
+     * 
+     * If there is no imaginary part, only the real part will be returned. If there
+     * is no real part, only the imaginary part will be returned.
      *
-     * @return  a string representation of the value of this object inf the form
-     * {@code a + bi}, where {@code a} is the real part and {@code b} is the imaginary part.
+     * @return a string representation of the value of this object inf the form
+     *         {@code a + bi}, where {@code a} is the real part and {@code b} is the
+     *         imaginary part.
      * @see java.lang.Double#toString(double)
      */
     @Override
@@ -247,22 +306,19 @@ public class Complex {
     }
 
     /**
-     * Parses the string argument as Complex number. The
-     * characters in the string must all be decimal digits, except
-     * that the character before the real and imaginary parts 
-     * may be an ASCII minus sign {@code '-'}
-     * ({@code '\u005Cu002D'}) to indicate a negative value or an
-     * ASCII plus sign {@code '+'} ({@code '\u005Cu002B'}) to
-     * indicate a positive value, and an ASCII {@code 'i'}
-     * after the imaginary part to indicate
-     * it is imaginary. The resulting Complex value is
-     * returned.
+     * Parses the string argument as Complex number. The characters in the string
+     * must all be decimal digits, except that the character before the real and
+     * imaginary parts may be an ASCII minus sign {@code '-'}
+     * ({@code '\u005Cu002D'}) to indicate a negative value or an ASCII plus sign
+     * {@code '+'} ({@code '\u005Cu002B'}) to indicate a positive value, and an
+     * ASCII {@code 'i'} after the imaginary part to indicate it is imaginary. The
+     * resulting Complex value is returned.
      *
-     * @param s    a {@code String} containing the {@code Complex}
-     *             representation to be parsed
-     * @return     the Complex value represented by the argument.
-     * @exception  NumberFormatException  if the string does not contain a
-     *               parsable Complex.
+     * @param s a {@code String} containing the {@code Complex} representation to be
+     *          parsed
+     * @return the Complex value represented by the argument.
+     * @exception NumberFormatException if the string does not contain a parsable
+     *                                  Complex.
      */
     public static Complex parseComplex(String s) throws NumberFormatException {
         if (s == null) {
@@ -293,6 +349,6 @@ public class Complex {
         } catch (Exception e) {
             throw new NumberFormatException("There was a parsing error.");
         }
-        
+
     }
 }
