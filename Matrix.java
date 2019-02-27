@@ -57,6 +57,29 @@ public class Matrix {
         return new Matrix(newMtr);
     }
 
+    public Matrix multiply(double multand) {
+        Complex[][] newMtr = new Complex[m][n];
+        for (int row = 0; row < this.m; row++) {
+            for (int x = 0; x < this.n; x++) {
+                newMtr[row][x] = this.mtx[row][x].multiply(multand);
+            }
+        }
+        return new Matrix(newMtr);
+    }
+
+    public Matrix multiply(Matrix multand) {
+        if (this.n != multand.m) {
+            throw new MismatchDimensionException("Multiplication requre this.n = multand.m");
+        }
+        Complex[][] newMtr = new Complex[this.n][multand.m];
+        for (int row = 0; row < this.n; row++) {
+            for (int x = 0; x < multand.m; x++) {
+                //TODO impliment multiplication.
+            }
+        }
+        return new Matrix(newMtr);
+    }
+
     public static Matrix readMatrix() {
         Complex[][] mtx;
         Scanner kb = new Scanner(System.in);

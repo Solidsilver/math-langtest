@@ -1,7 +1,8 @@
 public class Tester{
     public static void main(String[] args) {
-        Matrix m = Matrix.readMatrix();
-        System.out.println(m);
-
+        Complex c1 = Complex.parseComplex2("3+i");
+        System.out.println(c1);
     }
+
+
 }
