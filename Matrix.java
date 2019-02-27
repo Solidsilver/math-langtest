@@ -132,7 +132,6 @@ public class Matrix {
             retStr = retStr.substring(0, retStr.length() - 2);
             retStr += "|\n";
         }
-
         return retStr;
     }
 }
