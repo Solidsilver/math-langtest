@@ -324,7 +324,6 @@ public class Complex {
         if (s == null) {
             throw new NumberFormatException("null");
         }
-        //TODO: Doesn't work with double imaginary parts
         s.strip();
         if (s.contains(" ")) {
             throw new NumberFormatException("Cannot contain spaces");
@@ -348,7 +347,7 @@ public class Complex {
         try {
             return new Complex(Double.parseDouble(real), Double.parseDouble(imaginary));
         } catch (Exception e) {
-            throw new NumberFormatException("There was a parsing error.");
+            throw new NumberFormatException("There was a parsing error: real was "+ real + ", imag. was " + imaginary);
         }
 
     }
