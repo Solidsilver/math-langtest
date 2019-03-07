@@ -324,15 +324,16 @@ public class Complex {
         if (s == null) {
             throw new NumberFormatException("null");
         }
+        //TODO: Doesn't work with double imaginary parts
         s.strip();
         if (s.contains(" ")) {
             throw new NumberFormatException("Cannot contain spaces");
         }
-        Pattern p = Pattern.compile("[+-]?([0-9]+)?i");
+        Pattern p = Pattern.compile("[+-]?([0-9]+[.]?[0-9]*)?i");
         Matcher m = p.matcher(s);
         String imaginary;
         String real;
-        real = s.replaceAll("[+-]?([0-9]+)?i", "");
+        real = s.replaceAll("[+-]?([0-9]+[.]?[0-9]*)?i", "");
         if (real.equals("")) {
             real = "0";
         }

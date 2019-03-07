@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.io.*;
 
 public class Matrix {
     private Complex[][] mtx;
@@ -132,14 +133,19 @@ public class Matrix {
     }
 
     public static Matrix readMatrix() {
+        System.out.println("Enter the matrix below:");
+        return readMatrix(System.in);
+    }
+
+    public static Matrix readMatrix(InputStream in) {
         Complex[][] mtx;
-        Scanner kb = new Scanner(System.in);
+        Scanner sIn = new Scanner(in);
         int n;
         ArrayList<Complex[]> tempList = new ArrayList<>();
         String read = "";
-        System.out.println("Enter the matrix below:");
+        //System.out.println("Enter the matrix below:");
         do {
-            read = kb.nextLine();
+            read = sIn.nextLine();
             if (!read.equals("")) {
                 tempList.add(readNums(read));
             }
@@ -152,6 +158,8 @@ public class Matrix {
         }
         return new Matrix(mtx, mtx.length, mtx[0].length);
     }
+
+    
 
     private static Complex[] readNums(String in) {
         Scanner line = new Scanner(in);
