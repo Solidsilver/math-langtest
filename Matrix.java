@@ -84,10 +84,17 @@ public class Matrix {
         if (this.n != multand.m) {
             throw new MismatchDimensionException("Multiplication requre this.n = multand.m");
         }
-        Complex[][] newMtr = new Complex[this.n][multand.m];
-        for (int row = 0; row < this.n; row++) {
-            for (int x = 0; x < multand.m; x++) {
-                //TODO impliment multiplication.
+        int n = this.n;
+        Complex[][] newMtr = new Complex[this.m][multand.n];
+        //System.out.println("New matrix is " + this.m + "x" + multand.n);
+        Complex c;
+        for (int i = 0; i < this.m; i++) {
+            for (int j = 0; j < multand.n; j++) {
+                c = new Complex(0.0);
+                for (int k = 0; k < n; k++) {
+                    c = c.add(this.getValue(i, k).multiply(multand.getValue(k, j)));
+                }
+                newMtr[i][j] = c;
             }
         }
         return new Matrix(newMtr);

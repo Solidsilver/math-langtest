@@ -1,3 +1,5 @@
 *.class
 launch.json
 Tester.java
+Terry.java
+.vscode/
