@@ -184,12 +184,12 @@ public class Matrix {
     public String toString() {
         String retStr = "";
         for (Complex[] row: this.mtx) {
-            retStr += "|";
+            retStr += "[";
             for (Complex c: row) {
                 retStr += c + "  ";
             }
             retStr = retStr.substring(0, retStr.length() - 2);
-            retStr += "|\n";
+            retStr += "]\n";
         }
         return retStr;
     }
