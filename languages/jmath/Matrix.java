@@ -1,3 +1,5 @@
+package languages.jmath;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
@@ -87,7 +89,7 @@ public class Matrix {
         }
         int n = this.n;
         Complex[][] newMtr = new Complex[this.m][multand.n];
-        //System.out.println("New matrix is " + this.m + "x" + multand.n);
+        // System.out.println("New matrix is " + this.m + "x" + multand.n);
         Complex c;
         for (int i = 0; i < this.m; i++) {
             for (int j = 0; j < multand.n; j++) {
@@ -113,7 +115,7 @@ public class Matrix {
             }
         }
         return new Matrix(newMtx);
-    } 
+    }
 
     public static Matrix createDiagonal(Complex... diags) {
         int n = diags.length;
@@ -143,7 +145,7 @@ public class Matrix {
         int n;
         ArrayList<Complex[]> tempList = new ArrayList<>();
         String read = "";
-        //System.out.println("Enter the matrix below:");
+        // System.out.println("Enter the matrix below:");
         do {
             read = sIn.nextLine();
             if (!read.equals("")) {
@@ -152,14 +154,12 @@ public class Matrix {
         } while (!read.equals(""));
         mtx = new Complex[tempList.size()][];
         int i = 0;
-        for (Complex[] comp: tempList) {
+        for (Complex[] comp : tempList) {
             mtx[i] = comp;
             i++;
         }
         return new Matrix(mtx, mtx.length, mtx[0].length);
     }
-
-    
 
     private static Complex[] readNums(String in) {
         Scanner line = new Scanner(in);
@@ -173,7 +173,7 @@ public class Matrix {
         } while (line.hasNext());
         Complex[] ret = new Complex[nums.size()];
         int i = 0;
-        for (Complex a: nums) {
+        for (Complex a : nums) {
             ret[i] = a;
             i++;
         }
@@ -183,9 +183,9 @@ public class Matrix {
     @Override
     public String toString() {
         String retStr = "";
-        for (Complex[] row: this.mtx) {
+        for (Complex[] row : this.mtx) {
             retStr += "[";
-            for (Complex c: row) {
+            for (Complex c : row) {
                 retStr += c + "  ";
             }
             retStr = retStr.substring(0, retStr.length() - 2);
